@@ -1,5 +1,5 @@
 LINK.o := g++
 CXXFLAGS=-std=c++0x
-servparse: servparse.o
+test: test.o servparse.o
 clean:
-	rm servparse.o servparse
+	rm -f servparse.o servparse test.o

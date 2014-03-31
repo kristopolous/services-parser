@@ -31,16 +31,11 @@
  * SUCH DAMAGE.
  */
 
+#include "servparse.h"
+#include <unordered_map>
+#include <arpa/inet.h>
 #include <sys/types.h>
 #include <string.h>
-
-#include <stdio.h>
-#include <arpa/inet.h>
-#include <sys/time.h>
-
-#include <unordered_map>
-#include <string>
-using namespace std;
 
 #define	MAXALIASES	35
 struct servent {
@@ -208,33 +203,4 @@ int findByName(string name)
 {
 	loadFile();
 	return byName[name];
-}
-
-long timer()
-{
-	static long start = 0, end = 0;
-	long diff;
-	timeval time;
-
-	gettimeofday(&time, NULL);
-	end  = ((unsigned long long)time.tv_sec * 1000000 + time.tv_usec);
-	diff = end - start;
-	start = end;
-	return diff;
-}
-
-int main() 
-{
-	int ix, iy;
-
-	for(iy = 1; iy < 10; iy++) 
-	{
-		timer();
-		for(ix = 0; ix < 50000; ix++) 
-		{
-			findByName(findByPort(ix, "U"));
-		}
-		printf("Lookup Time: %ld \n", timer());
-	}
-	return (0);
 }
