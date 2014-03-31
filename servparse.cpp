@@ -190,29 +190,36 @@ void loadFile()
 
 string service::findByPort(int port, string type = "tcp") 
 {
-	return loadFile(), (
-		(type[0] | 0x20 == 'u') ?
-			byPortUDP[port] :
-			byPortTCP[port]
-		);
+	loadFile();
+
+	return (type[0] | 0x20 == 'u') ?
+		byPortUDP[port] :
+		byPortTCP[port];
+		
 }
 
 int service::findByName(string name) 
 {
-	return loadFile(), byName[name];
+	loadFile();
+	return byName[name];
 }
 
 string service::toName(string in)
 {
-	return (strspn( in.c_str(), "0123456789" ) == in.size() )
-		?  loadFile(), byPortTCP[stoi(in)]
-		:  in;
+	if( !in.empty() && strspn( in.c_str(), "0123456789" ) == in.size() ) 
+	{
+		loadFile(); 
+		return byPortTCP[stoi(in)];
+	}
+	return in;
 }
 
 int service::toPort(string in)
 {
-	return (strspn( in.c_str(), "0123456789" ) == in.size() )
-		?  	stoi(in)
-		: 	service::findByName(in);
+	return in.empty() ? 0 : (
+		( strspn( in.c_str(), "0123456789" ) == in.size() )
+			? stoi(in)
+			: service::findByName(in)
+		);
 }
 

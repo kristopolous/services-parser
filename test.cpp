@@ -82,7 +82,7 @@ long timer()
 int main() 
 {
 	int ix, iy, res;
-	int runs = 390;
+	int runs = 1200;
 	int err = 0, succ = 0;
 	string name;
 
@@ -90,11 +90,12 @@ int main()
 	{
 		err = 0; succ = 0;
 		timer();
-		for(ix = 0; ix < 40000; ix++) 
+		for(ix = 0; ix < 50000; ix++) 
 		{
 			name = service::findByPort(ix, "T");
 			res = service::findByName(name);
 
+/*
 			if(res > 0) {
 				if(res != ix) 
 				{
@@ -106,6 +107,7 @@ int main()
 					succ++;
 				}
 			}
+			*/
 		}
 		//printf("Error: %d\nSuccess: %d\n", err, succ);
 		timer();
@@ -117,13 +119,15 @@ int main()
 	{
 		err = 0; succ = 0;
 		timer();
-		for(ix = 0; ix < 40000; ix++) 
+		for(ix = 0; ix < 50000; ix++) 
 		{
 			sink(START);
 			in = to_string(ix);
 			sink(END);
 
 			name = service::toName(in);
+			res = service::toPort(name);
+			/*
 			if(!name.empty()) {
 				res = service::toPort(name);
 
@@ -139,6 +143,7 @@ int main()
 					}
 				}
 			}
+			*/
 		}
 		//printf("Error: %d Success: %d\n", err, succ);
 		timer();
