@@ -1,3 +1,4 @@
+LINK.o := g++
 CXXFLAGS=-std=c++0x
 servparse: servparse.o
 clean:
