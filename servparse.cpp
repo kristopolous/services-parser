@@ -39,10 +39,10 @@
 
 #define	MAXALIASES	35
 struct servent {
-	char *s_name;	/*%< official service name */
-	char **s_aliases;	/*%< alias list */
-	int	s_port;		/*%< port # */
-	char *s_proto;	/*%< protocol to use */
+	char *s_name;     /*%< official service name */
+	char **s_aliases; /*%< alias list */
+	int s_port;       /*%< port # */
+	char *s_proto;    /*%< protocol to use */
 };
 
 static char SERVDB[] = "services";
