@@ -8,5 +8,13 @@
 #include <string>
 using namespace std;
 
-string findByPort(int port, string type/* = "tcp"*/);
-int findByName(string name);
+class service {
+	public:
+		static string findByPort(int port, string type/* = "tcp"*/);
+		static int findByName(string name);
+
+		// These will typecheck whats coming in and return a
+		// name (either what came in or converted)
+		static string toName(string in);
+		static int toPort(string in);
+};
